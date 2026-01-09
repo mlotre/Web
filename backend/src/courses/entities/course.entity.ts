@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'ty
 import { Category } from '../../categories/entities/category.entity';
 import { Enrollment } from '../../enrollments/entities/enrollment.entity';
 
-@Entity()                                     // veritabanına course adında tablo yarat der
+@Entity()
 export class Course {
   @PrimaryGeneratedColumn()
   id: number;

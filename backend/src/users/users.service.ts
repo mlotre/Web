@@ -12,7 +12,6 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    // Email zaten kayıtlı mı kontrol et
     const existingUser = await this.findByEmail(createUserDto.email);
     if (existingUser) {
       throw new ConflictException('Bu email adresi zaten kayıtlı!');
@@ -22,17 +21,17 @@ export class UsersService {
     return await this.usersRepository.save(newUser);
   }
 
-  async findByEmail(email: string) { // Email'e göre kullanıcı bul (Login için gerekli)
+  async findByEmail(email: string) {
     return await this.usersRepository.findOneBy({ email });
   }
 
-  async findAll() { // Tüm kullanıcıları getir
+  async findAll() {
     return await this.usersRepository.find({
       select: ['id', 'email', 'fullName', 'role'],
     });
   }
 
-  async remove(id: number) { // Kullanıcı sil
+  async remove(id: number) {
     return await this.usersRepository.delete(id);
   }
 }

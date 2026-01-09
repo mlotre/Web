@@ -14,13 +14,13 @@ import { CoursesModule } from './courses/courses.module';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
 import { AuthModule } from './auth/auth.module';
 
-@Module({ // Ana modül - tüm modülleri bir araya getirir
+@Module({
   imports: [
-    TypeOrmModule.forRoot({ // Veritabanı ayarları
+    TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'database.sqlite',
-      entities: [User, Category, Course, Enrollment], // Veritabanı tabloları
-      synchronize: true, // Kod değişince tabloları otomatik güncelle
+      entities: [User, Category, Course, Enrollment],
+      synchronize: true,
     }),
 
     UsersModule,

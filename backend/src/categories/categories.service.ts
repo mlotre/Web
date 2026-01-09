@@ -9,33 +9,27 @@ import { Course } from '../courses/entities/course.entity';
 @Injectable()
 export class CategoriesService {
   constructor(
-    @InjectRepository(Category) // Category tablosuyla çalışmak için repository enjekte et
+    @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
-    @InjectRepository(Course) // Course tablosuyla çalışmak için repository enjekte et
+    @InjectRepository(Course)
     private courseRepository: Repository<Course>,
   ) {}
 
-  create(createCategoryDto: CreateCategoryDto) { // Yeni kategori oluştur
-    const newCategory = this.categoryRepository.create(createCategoryDto); // DTO'dan entity oluştur
-    return this.categoryRepository.save(newCategory); // Veritabanına kaydet
+  create(createCategoryDto: CreateCategoryDto) {
+    const newCategory = this.categoryRepository.create(createCategoryDto);
+    return this.categoryRepository.save(newCategory);
   }
 
-  findAll() { // Tüm kategorileri getir
-    return this.categoryRepository.find(); // SQL: SELECT * FROM category
+  findAll() {
+    return this.categoryRepository.find();
   }
 
-  findOne(id: number) { // ID'ye göre kategori getir
-    return this.categoryRepository.findOneBy({ id }); // SQL: SELECT * FROM category WHERE id = ?
+  update(id: number, updateCategoryDto: UpdateCategoryDto) {
+    return this.categoryRepository.update(id, updateCategoryDto);
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) { // Kategori güncelle
-    return this.categoryRepository.update(id, updateCategoryDto); // SQL: UPDATE category SET ... WHERE id = ?
-  }
-
-  async remove(id: number) { // Kategori sil
-    // Önce bu kategoriye ait dersleri sil
+  async remove(id: number) {
     await this.courseRepository.delete({ categoryId: id });
-    // Sonra kategoriyi sil
     return this.categoryRepository.delete(id);
   }
 }

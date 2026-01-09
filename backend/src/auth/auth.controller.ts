@@ -3,24 +3,24 @@ import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 
-@Controller('auth') // /auth route'u için controller
+@Controller('auth')
 export class AuthController {
   constructor(
-    private readonly authService: AuthService, // Giriş işlemleri için
-    private readonly usersService: UsersService, // Kayıt işlemleri için
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
   ) {}
 
-  @Post('login') // POST /auth/login - Giriş yap
-  async login(@Body() body) { // Frontend'den email ve password al
-    const user = await this.authService.validateUser(body.email, body.password); // Email ve şifre doğru mu kontrol et
-    if (!user) { // Yanlışsa hata fırlat
+  @Post('login')
+  async login(@Body() body) {
+    const user = await this.authService.validateUser(body.email, body.password);
+    if (!user) {
       throw new UnauthorizedException('Hatalı email veya şifre');
     }
-    return this.authService.login(user); // Doğruysa token oluştur ve döndür
+    return this.authService.login(user);
   }
 
-  @Post('register') // POST /auth/register - Kayıt ol
-  async register(@Body() createUserDto: CreateUserDto) { // Frontend'den kullanıcı bilgilerini al
-    return this.usersService.create(createUserDto); // Yeni kullanıcı oluştur ve veritabanına kaydet
+  @Post('register')
+  async register(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 }

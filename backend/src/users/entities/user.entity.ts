@@ -1,23 +1,23 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Enrollment } from '../../enrollments/entities/enrollment.entity';
 
-@Entity() // Veritabanında 'user' tablosu oluşturur
+@Entity()
 export class User {
-  @PrimaryGeneratedColumn() // Otomatik artan ID (1, 2, 3...)
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true }) // Benzersiz email (aynısından iki tane olamaz)
+  @Column({ unique: true })
   email: string;
 
-  @Column() // Şifre (hash'lenmiş halde saklanır)
+  @Column()
   password: string;
 
-  @Column({ default: 'student' }) // Rol: 'student' (öğrenci) veya 'admin' (öğretmen)
+  @Column({ default: 'student' })
   role: string;
 
-  @Column({ nullable: true }) // İsim soyisim (zorunlu değil)
+  @Column({ nullable: true })
   fullName: string;
 
-  @OneToMany(() => Enrollment, (enrollment) => enrollment.user) // Bir kullanıcının birden çok ders kaydı olabilir
+  @OneToMany(() => Enrollment, (enrollment) => enrollment.user)
   enrollments: Enrollment[];
 }

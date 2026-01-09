@@ -6,7 +6,7 @@ import { Category } from './entities/category.entity';
 import { Course } from '../courses/entities/course.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Category, Course])], // Category ve Course tablolarını bağlıyoruz
+  imports: [TypeOrmModule.forFeature([Category, Course])],
   controllers: [CategoriesController],
   providers: [CategoriesService],
 })

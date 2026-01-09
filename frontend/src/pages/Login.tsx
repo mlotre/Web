@@ -10,7 +10,6 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    // Frontend validasyonu
     if (!email.trim()) {
       setError('Email boş olamaz!');
       return;

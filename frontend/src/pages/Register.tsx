@@ -7,18 +7,16 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [role, setRole] = useState('student'); // Varsayılan olarak öğrenci
+  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    // Frontend validasyonu
     if (!email.trim()) {
       setError('Email boş olamaz!');
       return;
     }
 
-    // Email formatı kontrolü
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError('Geçerli bir email adresi giriniz!');
@@ -39,7 +37,6 @@ export default function Register() {
       await api.post('/auth/register', { email, password, fullName, role });
       navigate('/');
     } catch (err: any) {
-      // Backend'den gelen hata mesajını göster
       const errorMessage = err.response?.data?.message || 'Kayıt başarısız! Bilgileri kontrol et.';
       setError(Array.isArray(errorMessage) ? errorMessage.join(', ') : errorMessage);
     }
@@ -72,7 +69,6 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}
         />
         
-        {/* ROL SEÇME KUTUSU */}
         <TextField 
           select 
           label="Rolünü Seç" 

@@ -10,11 +10,9 @@ export class Enrollment {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   enrolledAt: Date;
 
-  // Hangi kullanıcı?
   @ManyToOne(() => User, (user) => user.enrollments, { onDelete: 'CASCADE' })
   user: User;
 
-  // Hangi ders?
   @ManyToOne(() => Course, (course) => course.enrollments, { onDelete: 'CASCADE' })
   course: Course;
 }

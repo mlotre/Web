@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
-// İkonlar
+
 import SchoolIcon from '@mui/icons-material/School';
 import ClassIcon from '@mui/icons-material/Class';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -46,11 +46,9 @@ export default function Courses() {
   const [editDesc, setEditDesc] = useState('');
   const [editCategoryId, setEditCategoryId] = useState<number>(1);
 
-  // Kategori yönetimi
   const [categoryName, setCategoryName] = useState('');
   const [filterCategoryId, setFilterCategoryId] = useState<number | null>(null);
 
-  // Kategori düzenleme
   const [editCategoryOpen, setEditCategoryOpen] = useState(false);
   const [editCategoryId2, setEditCategoryId2] = useState<number | null>(null);
   const [editCategoryName, setEditCategoryName] = useState('');
@@ -58,9 +56,9 @@ export default function Courses() {
   const role = localStorage.getItem('role');
 
   useEffect(() => {
-    fetchCategories();    // 1. Kategorileri getir
-    fetchCourses();       // 2. Dersleri getir
-    fetchMyEnrollments(); // 3. Kayıtlarımı getir
+    fetchCategories();
+    fetchCourses();
+    fetchMyEnrollments();
   }, []);
 
   const fetchCategories = async () => {

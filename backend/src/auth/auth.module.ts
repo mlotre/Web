@@ -8,14 +8,14 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    UsersModule, // Kullanıcı işlemleri için (AuthService içinde UsersService kullanılıyor)
-    PassportModule, // Token doğrulama altyapısı için
+    UsersModule,
+    PassportModule,
     JwtModule.register({
-      secret: 'GIZLI_KELIME', // Token oluştururken kullanılan gizli anahtar (jwt.strategy.ts ile aynı olmalı!)
-      signOptions: { expiresIn: '1d' }, // Token 1 gün geçerli olsun (1d = 1 day)
+      secret: 'GIZLI_KELIME',
+      signOptions: { expiresIn: '1d' },
     }),
   ],
-  controllers: [AuthController], // API endpoint'leri: POST /auth/login, POST /auth/register
-  providers: [AuthService, JwtStrategy], // Giriş/kayıt işlemleri ve token doğrulama
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

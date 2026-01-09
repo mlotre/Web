@@ -13,7 +13,6 @@ export class CoursesService {
   ) {}
 
   create(createCourseDto: CreateCourseDto) {
-    // Kategori ilişkisini ID üzerinden kuruyoruz
     const newCourse = this.courseRepository.create({
       ...createCourseDto,
       category: { id: createCourseDto.categoryId },
@@ -22,15 +21,7 @@ export class CoursesService {
   }
 
   findAll() {
-    // Dersleri çekerken kategorisini de getir (relations)
     return this.courseRepository.find({ relations: ['category'] });
-  }
-
-  findOne(id: number) {
-    return this.courseRepository.findOne({
-      where: { id },
-      relations: ['category'],
-    });
   }
 
   update(id: number, updateCourseDto: UpdateCourseDto) {
